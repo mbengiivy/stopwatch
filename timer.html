@@ -47,7 +47,7 @@
         cursor:pointer;
         font-size:1.2em;
         position: absolute;
-        left:50%;
+        left:36%;
         top:60%;
         font-family: Georgia, 'Times New Roman', Times, serif;
         padding:18px 10px;
@@ -64,6 +64,31 @@
             border: solid 1px rgb(0, 0, 0);
             color:base-color;
         }
+        #button-stop{
+        background:base-color;
+        color:black;
+        border: solid 3px black;
+        text-decoration:none;
+        cursor:pointer;
+        font-size:1.2em;
+        position: absolute;
+        left:65%;
+        top:60%;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding:18px 10px;
+        width:180px;
+        margin: 10px;
+        outline: none;
+        transition:1s;
+    }
+
+        #button-stop:hover{
+            
+            
+            background:rgb(56, 20, 124);
+            border: solid 1px rgb(0, 0, 0);
+            color:base-color;
+        }
 	
 
 </style>
@@ -72,11 +97,12 @@
     
     <div class="timer">
         <Div class="timer-time">
-        <span id="seconds">00</span>:
+        <span id="hundreds">00</span>:
         <span id="tens">00</span>:
-        <span id="hundreds">00</span>
+        <span id="seconds">00</span>
         </Div>
         <button id="button-start">Start</button>
+        <button id="button-stop">Stop</button>
     </div>
     
     
@@ -95,59 +121,57 @@
         var seconds= 0o0;
         var tens= 0o0;
         var hundreds= 0o0;
-        const appendHundreds=document.getElementById("hundreds");
-        const appendTens=document.getElementById("tens");
-        const appendSeconds=document.getElementById("#seconds");
-        var Interval; 
+        var appendHundreds=document.getElementById("hundreds");
+        var appendTens=document.getElementById("tens");
+        var appendSeconds=document.getElementById("seconds");
+        var Interval 
 
-        const buttonStart= document.getElementById('#button-start')
+        const buttonStart= document.getElementById("button-start");
+        const buttonStop= document.getElementById("button-stop");
+
         
-        buttonStart.onclick = function() {
+        buttonStart.onclick = function(){
             clearInterval(Interval);
-            Interval = setInterval(startTimer, 10);
-  }
-
-
-        function startTimer () {
-    tens++; 
-    
-    if(tens <= 9){
-      appendTens.innerHTML = "0" + tens;
-    }
-    
-    if (tens > 9){
-      appendTens.innerHTML = tens;
-      
-    } 
-    
-    if (tens > 60) {
-      console.log("seconds");
-      seconds++;
-      appendSeconds.innerHTML = "0" + seconds;
-      tens = 0;
-      appendTens.innerHTML = "0" + 0;
-    }
-    
-    if (seconds > 9){
-      appendSeconds.innerHTML = seconds;
-    }
-
-    if (seconds>60){
-        console.log("hundreds");
-        hundreds++;
-        seconds=0;
-        appendHundreds.innerHTML = "0" + hundreds;
-        
-        if (hundreds>9){
-            appendHundreds.innerHTML = hundreds;
+            Interval= setInterval(startTimer, 10);
         }
-    }
-  
-  }
+
+        buttonStop.onclick = function() {
+       clearInterval(Interval);
+        }
+        
+        function startTimer(){
+            seconds++;
+
+
+            if(seconds <= 9){
+                appendSeconds.innerHTML = "0" + seconds;
+            }
+            if (seconds > 9){
+                appendSeconds.innerHTML=seconds;
+            }
+            if (seconds > 60) {
+                console.log("tens!");
+                tens++;
+                appendTens.innerHTML = "0" + tens;
+                seconds = 0;
+                appendSeconds.innerHTML = "0" + 0;
+            }
+            if (tens > 9){
+                appendTens.innerHTML = tens;
+            }
+            if (tens>60){
+                console.log("hundreds");
+                hundreds++;
+                tens=0;
+                appendHundreds.innerHTML = "0" + hundreds;
+
+                if (hundreds>9){
+                    appendHundreds.innerHTML = hundreds;
+                } 
+            }
+        }
 
     }
-
-
 
 </script>
 
